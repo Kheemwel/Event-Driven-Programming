@@ -1,0 +1,10 @@
+C:\Users\ComputerLab4PC1\source\repos\BasicQueuingCashier\bin\Debug\BasicQueuingCashier.exe.config
+C:\Users\ComputerLab4PC1\source\repos\BasicQueuingCashier\bin\Debug\BasicQueuingCashier.exe
+C:\Users\ComputerLab4PC1\source\repos\BasicQueuingCashier\bin\Debug\BasicQueuingCashier.pdb
+C:\Users\ComputerLab4PC1\source\repos\BasicQueuingCashier\obj\Debug\BasicQueuingCashier.csprojAssemblyReference.cache
+C:\Users\ComputerLab4PC1\source\repos\BasicQueuingCashier\obj\Debug\BasicQueuingCashier.CashierWindowQueueForm.resources
+C:\Users\ComputerLab4PC1\source\repos\BasicQueuingCashier\obj\Debug\BasicQueuingCashier.Properties.Resources.resources
+C:\Users\ComputerLab4PC1\source\repos\BasicQueuingCashier\obj\Debug\BasicQueuingCashier.QueuingForm.resources
+C:\Users\ComputerLab4PC1\source\repos\BasicQueuingCashier\obj\Debug\BasicQueuingCashier.csproj.GenerateResource.cache
+C:\Users\ComputerLab4PC1\source\repos\BasicQueuingCashier\obj\Debug\BasicQueuingCashier.exe
+C:\Users\ComputerLab4PC1\source\repos\BasicQueuingCashier\obj\Debug\BasicQueuingCashier.pdb
