@@ -1,0 +1,10 @@
+C:\Users\ComputerLab4PC1\Desktop\OrganizationProfile\obj\Debug\OrganizationProfile.csprojAssemblyReference.cache
+C:\Users\ComputerLab4PC1\Desktop\OrganizationProfile\obj\Debug\OrganizationProfile.frmConfirmation.resources
+C:\Users\ComputerLab4PC1\Desktop\OrganizationProfile\obj\Debug\OrganizationProfile.frmRegistration.resources
+C:\Users\ComputerLab4PC1\Desktop\OrganizationProfile\obj\Debug\OrganizationProfile.Properties.Resources.resources
+C:\Users\ComputerLab4PC1\Desktop\OrganizationProfile\obj\Debug\OrganizationProfile.csproj.GenerateResource.cache
+C:\Users\ComputerLab4PC1\Desktop\OrganizationProfile\bin\Debug\OrganizationProfile.exe.config
+C:\Users\ComputerLab4PC1\Desktop\OrganizationProfile\bin\Debug\OrganizationProfile.exe
+C:\Users\ComputerLab4PC1\Desktop\OrganizationProfile\bin\Debug\OrganizationProfile.pdb
+C:\Users\ComputerLab4PC1\Desktop\OrganizationProfile\obj\Debug\OrganizationProfile.exe
+C:\Users\ComputerLab4PC1\Desktop\OrganizationProfile\obj\Debug\OrganizationProfile.pdb
