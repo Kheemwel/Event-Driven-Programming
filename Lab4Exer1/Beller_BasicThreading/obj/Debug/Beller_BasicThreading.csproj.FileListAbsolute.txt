@@ -1,0 +1,9 @@
+C:\Users\ComputerLab4PC1\Desktop\Beller_BasicThreading\bin\Debug\Beller_BasicThreading.exe.config
+C:\Users\ComputerLab4PC1\Desktop\Beller_BasicThreading\bin\Debug\Beller_BasicThreading.exe
+C:\Users\ComputerLab4PC1\Desktop\Beller_BasicThreading\bin\Debug\Beller_BasicThreading.pdb
+C:\Users\ComputerLab4PC1\Desktop\Beller_BasicThreading\obj\Debug\Beller_BasicThreading.csprojAssemblyReference.cache
+C:\Users\ComputerLab4PC1\Desktop\Beller_BasicThreading\obj\Debug\Beller_BasicThreading.FrmBasicThread.resources
+C:\Users\ComputerLab4PC1\Desktop\Beller_BasicThreading\obj\Debug\Beller_BasicThreading.Properties.Resources.resources
+C:\Users\ComputerLab4PC1\Desktop\Beller_BasicThreading\obj\Debug\Beller_BasicThreading.csproj.GenerateResource.cache
+C:\Users\ComputerLab4PC1\Desktop\Beller_BasicThreading\obj\Debug\Beller_BasicThreading.exe
+C:\Users\ComputerLab4PC1\Desktop\Beller_BasicThreading\obj\Debug\Beller_BasicThreading.pdb
