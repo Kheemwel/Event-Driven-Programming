@@ -1,0 +1,11 @@
+C:\Users\ComputerLab4PC1\Desktop\FileCreator\bin\Debug\FileCreator.exe.config
+C:\Users\ComputerLab4PC1\Desktop\FileCreator\bin\Debug\FileCreator.exe
+C:\Users\ComputerLab4PC1\Desktop\FileCreator\bin\Debug\FileCreator.pdb
+C:\Users\ComputerLab4PC1\Desktop\FileCreator\obj\Debug\FileCreator.csprojAssemblyReference.cache
+C:\Users\ComputerLab4PC1\Desktop\FileCreator\obj\Debug\FileCreator.FrmFileName.resources
+C:\Users\ComputerLab4PC1\Desktop\FileCreator\obj\Debug\FileCreator.FrmLab1.resources
+C:\Users\ComputerLab4PC1\Desktop\FileCreator\obj\Debug\FileCreator.Properties.Resources.resources
+C:\Users\ComputerLab4PC1\Desktop\FileCreator\obj\Debug\FileCreator.csproj.GenerateResource.cache
+C:\Users\ComputerLab4PC1\Desktop\FileCreator\obj\Debug\FileCreator.exe
+C:\Users\ComputerLab4PC1\Desktop\FileCreator\obj\Debug\FileCreator.pdb
+C:\Users\ComputerLab4PC1\Desktop\FileCreator\obj\Debug\FileCreator.FrmRegistration.resources
