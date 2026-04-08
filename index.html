@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Event Driven Programming Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+
+<body class="bg-slate-900 text-slate-200">
+    <div id="app" class="flex h-screen overflow-hidden" v-cloak>
+        <aside class="w-80 flex flex-col bg-slate-800 border-r border-slate-700 shadow-xl">
+            <div class="p-6">
+                <h1 class="text-2xl font-bold text-white tracking-tight">Kheemwel</h1>
+                <p class="text-xs text-slate-400 mt-1 uppercase tracking-widest font-semibold">
+                    Event Driven Programming
+                </p>
+
+                <div class="relative mt-6">
+                    <input v-model="searchQuery" type="text" placeholder="Search projects..."
+                        class="w-full bg-slate-900 border border-slate-600 rounded-lg py-2 px-3 text-sm focus:ring-2 focus:ring-sky-500 focus:outline-none transition-all" />
+                </div>
+            </div>
+
+            <nav class="flex-1 overflow-y-auto px-4 pb-4 space-y-2 custom-scrollbar">
+                <div v-for="lab in filteredLabs" :key="lab.name">
+                    <button @click="currentLab = lab"
+                        :class="currentLab?.name === lab.name ? 'bg-sky-600 text-white shadow-lg scale-[1.02]' : 'hover:bg-slate-700 text-slate-400 border-transparent'"
+                        class="w-full text-left p-4 rounded-xl border transition-all duration-200 group relative overflow-hidden">
+                        <span class="block text-sm font-bold"
+                            :class="currentLab?.name === lab.name ? 'text-white' : 'group-hover:text-sky-400'">
+                            {{ lab.name }}
+                        </span>
+                        <div class="flex gap-2 mt-2">
+                            <span v-if="lab.previewPath"
+                                class="text-[9px] px-1.5 py-0.5 rounded bg-slate-900/50 border border-slate-600 uppercase">
+                                {{ Array.isArray(lab.previewPath) ? lab.previewPath.length + ' Photos' : lab.previewType
+                                }}
+                            </span>
+                            <span
+                                class="text-[9px] px-1.5 py-0.5 rounded bg-amber-500/20 border border-amber-500/50 text-amber-400 uppercase font-bold">
+                                .EXE
+                            </span>
+                        </div>
+                    </button>
+                </div>
+            </nav>
+        </aside>
+
+        <main class="flex-1 flex flex-col bg-slate-950">
+            <header
+                class="h-14 border-b border-slate-800 flex items-center px-8 justify-between bg-slate-900/50 backdrop-blur-sm">
+                <div class="flex items-center gap-4">
+                    <span class="text-xs font-mono text-slate-500 italic">
+                        {{ currentLab ? `Previewing: ${currentLab.name}` : 'Select a project to begin' }}
+                    </span>
+                </div>
+
+                <div v-if="currentLab" class="flex gap-4">
+                    <a :href="currentLab.exePath" download
+                        class="text-xs font-bold text-amber-400 hover:text-amber-300 uppercase tracking-widest border border-amber-500/30 px-3 py-1 rounded-md hover:bg-amber-500/10 transition-all">
+                        Download .EXE ↓
+                    </a>
+                </div>
+            </header>
+
+            <div class="flex-1 bg-slate-900 relative overflow-hidden">
+                <div v-if="!currentLab"
+                    class="absolute inset-0 flex flex-col items-center justify-center text-slate-600">
+                    <p class="text-xl font-light tracking-widest opacity-30">SELECT A PROJECT</p>
+                </div>
+
+                <template v-else>
+                    <iframe v-if="currentLab.previewType === 'pdf' || currentLab.previewType === 'html'"
+                        :src="currentLab.previewPath" class="w-full h-full border-none bg-white">
+                    </iframe>
+
+                    <div id="content" v-else-if="currentLab.previewType === 'image'"
+                        class="w-full h-full overflow-y-auto p-12 custom-scrollbar">
+                        <div class="max-w-8xl mx-auto space-y-12">
+                            <div v-for="(img, index) in normalizedImages" :key="index" class="group relative">
+                                <p class="text-lg text-slate-500 mb-2 font-mono uppercase tracking-widest">Image {{
+                                    index + 1 }}</p>
+                                <img :src="img"
+                                    class="w-full shadow-2xl rounded-lg border border-slate-700 group-hover:border-sky-500 transition-colors" />
+                                <a :href="img" target="_blank"
+                                    class="absolute top-6 right-4 bg-black/50 backdrop-blur-md text-white p-2 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity">
+                                    Full Res ↗
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div v-else class="w-full h-full flex flex-col items-center justify-center text-slate-400">
+                        <div class="bg-slate-800 p-8 rounded-2xl border border-slate-700 text-center max-w-md">
+                            <div class="text-5xl mb-4">📦</div>
+                            <h2 class="text-xl font-bold text-white mb-2">No Visual Preview</h2>
+                            <p class="text-sm mb-6">This folder contains the source/executable only.</p>
+                            <a :href="currentLab.exePath" download
+                                class="bg-sky-600 hover:bg-sky-500 text-white px-6 py-2 rounded-lg font-bold transition-all inline-block">
+                                Download {{ currentLab.exeFileName }}
+                            </a>
+                        </div>
+                    </div>
+                </template>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        const { createApp, ref, computed } = Vue;
+
+        createApp({
+            setup() {
+                const searchQuery = ref("");
+                const currentLab = ref(null);
+
+                const labs = ref([
+                    {
+                        name: "01 Laboratory Exercise 1",
+                        previewType: "image",
+                        // You can now pass an array of images!
+                        previewPath: [
+                            "Lab1Exer1/Lab1Exer1 - FrmConfirm Code.png",
+                            "Lab1Exer1/Lab1Exer1 - FrmConfirm Design.png",
+                            "Lab1Exer1/Lab1Exer1 - FrmRegistration Code.png",
+                            "Lab1Exer1/Lab1Exer1 - FrmRegistration Design.png",
+                            "Lab1Exer1/Lab1Exer1 - Output.png",
+                            "Lab1Exer1/Lab1Exer1 - StudentInfoClass Code.png"
+                        ],
+                        exeFileName: "Account Registration.exe",
+                        exePath: "Lab1Exer1/Account Registration/bin/Debug/Account Registration.exe"
+                    },
+                    {
+                        name: "01 Laboratory Exercise 2",
+                        previewType: "image",
+                        previewPath: [
+                            "Lab1Exer2/Lab1Exer2 - FrmCalculator Design.png",
+                            "Lab1Exer2/Lab1Exer2 - FrmCalculator Output(Difference).png",
+                            "Lab1Exer2/Lab1Exer2 - FrmCalculator Output(Product).png",
+                            "Lab1Exer2/Lab1Exer2 - FrmCalculator Output(Quotient).png",
+                            "Lab1Exer2/Lab1Exer2 - FrmCalculator Output(Sum).png",
+                            "Lab1Exer2/Lab1Exer2 - CalculatorClass Code.png",
+                            "Lab1Exer2/Lab1Exer2 - FrmCalculator Code1.png",
+                            "Lab1Exer2/Lab1Exer2 - FrmCalculator Code2.png",
+                        ],
+                        exeFileName: "CalculatorApplication.exe",
+                        exePath: "Lab1Exer2/CalculatorApplication/bin/Debug/CalculatorApplication.exe"
+                    },
+                    {
+                        name: "02 Laboratory Exercise 1",
+                        previewType: "pdf",
+                        previewPath: "Lab2Exer1/Beller_Kimwel_Lourence_Lab2.pdf", // Works with single strings too
+                        exeFileName: "BasicQueuingCashier.exe",
+                        exePath: "PrelimTP/BasicQueuingCashier/bin/Debug/BasicQueuingCashier.exe"
+                    },
+                    {
+                        name: "03 Laboratory Exercise 1",
+                        previewType: "image",
+                        previewPath: [
+                            "Lab3Exer1/Output1.png",
+                            "Lab3Exer1/Output2.png",
+                            "Lab3Exer1/Output3.png",
+                            "Lab3Exer1/Output4.png",
+                            "Lab3Exer1/Output5.png",
+                        ],
+                        exeFileName: "OrganizationProfile.exe",
+                        exePath: "Lab3Exer1/OrganizationProfile/bin/Debug/OrganizationProfile.exe"
+                    },
+                    {
+                        name: "04 Laboratory Exercise 1",
+                        previewType: "image",
+                        previewPath: [
+                            "Lab4Exer1/Before starting Thread.png",
+                            "Lab4Exer1/End of Thread.png",
+                            "Lab4Exer1/Thread Output.png",
+                        ],
+                        exeFileName: "Beller_BasicThreading.exe",
+                        exePath: "Lab4Exer1/Beller_BasicThreading/bin/Debug/Beller_BasicThreading.exe"
+                    },
+                    {
+                        name: "05 Laboratory Exercise 1 (File Creator)",
+                        previewType: null,
+                        previewPath: null,
+                        exeFileName: "FileCreator.exe",
+                        exePath: "Lab5Exer1/FileCreator/bin/Debug/FileCreator.exe"
+                    },
+                    {
+                        name: "05 Laboratory Exercise 2 (File Reader)",
+                        previewType: null,
+                        previewPath: null,
+                        exeFileName: "FileReader.exe",
+                        exePath: "Lab5Exer2/FileReader/bin/Debug/FileReader.exe"
+                    },
+                    {
+                        name: "Prelim Task Performance",
+                        previewType: "pdf",
+                        previewPath: "PrelimTP/Beller - 02 Task Performance 1.pdf", // Works with single strings too
+                        exeFileName: "BasicQueuingCashier.exe",
+                        exePath: "PrelimTP/BasicQueuingCashier/bin/Debug/BasicQueuingCashier.exe"
+                    }
+                ]);
+
+                const filteredLabs = computed(() => {
+                    const q = searchQuery.value.toLowerCase();
+                    return labs.value.filter(lab => lab.name.toLowerCase().includes(q));
+                });
+
+                // Helper to ensure images are always treated as an array
+                const normalizedImages = computed(() => {
+                    if (!currentLab.value || currentLab.value.previewType !== 'image') return [];
+                    return Array.isArray(currentLab.value.previewPath)
+                        ? currentLab.value.previewPath
+                        : [currentLab.value.previewPath];
+                });
+
+                return { searchQuery, currentLab, filteredLabs, normalizedImages };
+            }
+        }).mount("#app");
+    </script>
+
+    <style>
+        [v-cloak] {
+            display: none;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        nav.custom-scrollbar::-webkit-scrollbar-track {
+            background: #1e293b;
+        }
+
+        #id.custom-scrollbar::-webkit-scrollbar-track {
+            background: #0f172a;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #475569;
+            border-radius: 10px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #0ea5e9;
+        }
+    </style>
+</body>
+
+</html>
